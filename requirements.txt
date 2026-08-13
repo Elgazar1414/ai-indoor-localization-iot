@@ -1,0 +1,7 @@
+numpy
+matplotlib
+scipy
+bleak
+geopy
+seaborn
+gpsd-py3
