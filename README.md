@@ -1,450 +1,80 @@
-\# AI-Based Indoor Localization and Tracking for IoT Networks
+<p align="center">
+  <img src="assets/readme/hero_animation.gif" alt="AI-Based Indoor Localization and Tracking for IoT Networks" width="100%">
+</p>
 
+<p align="center">
+  <b>Hybrid IoT localization prototype using ESP32, Raspberry Pi, Wi-Fi/BLE RSSI, GPS, MQTT, and trilateration.</b>
+</p>
 
+---
 
-A prototype IoT localization system that combines wireless signal measurements and embedded sensing to estimate and visualize device locations.
+## System Overview
 
+<p align="center">
+  <img src="assets/readme/esp32_acquisition.gif" alt="ESP32 Data Acquisition" width="100%">
+</p>
 
+<p align="center">
+  ESP32 collects Wi-Fi RSSI, BLE RSSI, MPU6050 IMU data, temperature, and hall-sensor readings, then publishes the payload through MQTT.
+</p>
 
-The project uses an \*\*ESP32\*\* for wireless and sensor data acquisition and a \*\*Raspberry Pi / Linux-based Python application\*\* for signal collection, localization, and visualization.
+---
 
+## Localization Pipeline
 
+<p align="center">
+  <img src="assets/readme/raspberry_pi_localization.gif" alt="Raspberry Pi Localization Pipeline" width="100%">
+</p>
 
-\## Project Overview
+<p align="center">
+  The Raspberry Pi / Linux application combines GPS, Wi-Fi, Bluetooth, and simulated LoRa measurements, then estimates position using trilateration and SciPy optimization.
+</p>
 
+---
 
+## Technology Stack
 
-Indoor localization is challenging because GPS performance is limited inside buildings and wireless signals are affected by obstacles, interference, and multipath propagation.
+<p align="center">
+  <img src="assets/readme/tech_stack.gif" alt="Technology Stack" width="100%">
+</p>
 
+---
 
-
-This project explores a hybrid localization approach using:
-
-
-
-\* Wi-Fi RSSI
-
-\* Bluetooth RSSI
-
-\* GPS reference data
-
-\* LoRa signal simulation
-
-\* ESP32 sensor measurements
-
-\* IMU data
-
-\* Trilateration-based position estimation
-
-
-
-\## System Architecture
-
-
+## Repository Structure
 
 ```text
-
-ESP32
-
-│
-
-├── Wi-Fi RSSI
-
-├── BLE RSSI
-
-├── MPU6050 IMU
-
-├── Temperature
-
-└── Hall Sensor
-
-&#x20;       │
-
-&#x20;       ▼
-
-&#x20;     MQTT
-
-&#x20;       │
-
-&#x20;       ▼
-
-Raspberry Pi / Linux
-
-│
-
-├── Wi-Fi scanning
-
-├── Bluetooth scanning
-
-├── GPS
-
-├── LoRa simulation
-
-│
-
-&#x20;       ▼
-
-Hybrid Localization
-
-│
-
-├── Signal processing
-
-├── Trilateration
-
-└── Numerical optimization
-
-&#x20;       │
-
-&#x20;       ▼
-
-Estimated Position
-
-&#x20;       │
-
-&#x20;       ▼
-
-Visualization \& Signal Analysis
-
-```
-
-
-
-\## ESP32 Data Acquisition
-
-
-
-The ESP32 firmware is implemented using \*\*MicroPython\*\*.
-
-
-
-It collects:
-
-
-
-\* Nearby Wi-Fi RSSI measurements
-
-\* Bluetooth Low Energy RSSI measurements
-
-\* MPU6050 accelerometer measurements
-
-\* ESP32 temperature information
-
-\* Hall sensor measurements
-
-
-
-The collected data is published to an MQTT topic periodically.
-
-
-
-\## Raspberry Pi Localization
-
-
-
-The Raspberry Pi / Linux-side Python application performs:
-
-
-
-\* GPS location acquisition
-
-\* Wi-Fi scanning using `nmcli`
-
-\* Bluetooth scanning using Bleak
-
-\* LoRa signal simulation
-
-\* Signal-based distance estimation
-
-\* Trilateration
-
-\* Position visualization
-
-\* Signal-strength-versus-distance visualization
-
-
-
-The trilateration algorithm minimizes localization error using SciPy numerical optimization.
-
-
-
-\## Technologies
-
-
-
-\*\*Programming\*\*
-
-
-
-\* Python
-
-\* MicroPython
-
-
-
-\*\*Hardware / Embedded\*\*
-
-
-
-\* ESP32
-
-\* Raspberry Pi
-
-\* MPU6050 IMU
-
-
-
-\*\*Wireless / IoT\*\*
-
-
-
-\* Wi-Fi
-
-\* Bluetooth Low Energy
-
-\* MQTT
-
-\* LoRa
-
-
-
-\*\*Python Libraries\*\*
-
-
-
-\* NumPy
-
-\* SciPy
-
-\* Matplotlib
-
-\* Seaborn
-
-\* Bleak
-
-\* Geopy
-
-\* gpsd-py3
-
-
-
-\## Repository Structure
-
-
-
-```text
-
 ai-indoor-localization-iot/
-
-│
-
 ├── src/
-
-│   └── raspberry\_pi\_localization.py
-
-│
-
+│   └── raspberry_pi_localization.py
 ├── firmware/
-
 │   └── esp32/
-
 │       ├── main.py
-
 │       └── config.example.py
-
-│
-
 ├── docs/
-
-│   ├── dissertation.pdf
-
-│   ├── project\_poster.pptx
-
-│   └── project\_presentation.pptx
-
-│
-
-├── data/
-
-├── results/
-
 ├── assets/
-
-│
-
+│   └── readme/
 ├── requirements.txt
-
 ├── .gitignore
-
 └── README.md
-
 ```
 
+---
 
-
-\## Installation
-
-
-
-Clone the repository:
-
-
+## Quick Start
 
 ```bash
-
-git clone https://github.com/YOUR-USERNAME/ai-indoor-localization-iot.git
-
+git clone https://github.com/Elgazar1414/ai-indoor-localization-iot.git
 cd ai-indoor-localization-iot
-
-```
-
-
-
-Install the Raspberry Pi / Python dependencies:
-
-
-
-```bash
-
 pip install -r requirements.txt
-
+python src/raspberry_pi_localization.py
 ```
 
+> **Prototype note:** the current Raspberry Pi script uses simulated LoRa values and experimental signal-source positions for localization testing and visualization.
 
+---
 
-\## ESP32 Configuration
+## Academic Project
 
-
-
-Copy:
-
-
-
-```text
-
-firmware/esp32/config.example.py
-
-```
-
-
-
-to:
-
-
-
-```text
-
-firmware/esp32/config.py
-
-```
-
-
-
-Then configure your own:
-
-
-
-\* Wi-Fi SSID
-
-\* Wi-Fi password
-
-\* MQTT broker address
-
-
-
-`config.py` is excluded from Git to prevent credentials from being committed.
-
-
-
-\## Running the Raspberry Pi Localization Application
-
-
-
-Run:
-
-
-
-```bash
-
-python src/raspberry\_pi\_localization.py
-
-```
-
-
-
-The application scans available wireless signals, estimates a position, displays localization information, and generates visualization plots.
-
-
-
-\## Current Prototype Notes
-
-
-
-This repository represents an experimental academic prototype.
-
-
-
-The current Raspberry Pi implementation uses simulated LoRa measurements and generates experimental signal-source positions around the GPS reference position for visualization and localization testing.
-
-
-
-Future implementations can replace these simulated values with measured anchor coordinates and real LoRa gateway measurements.
-
-
-
-\## Future Improvements
-
-
-
-\* Use fixed real-world anchor coordinates
-
-\* Integrate real LoRa RSSI measurements
-
-\* Add persistent MQTT subscriber integration on the Raspberry Pi
-
-\* Add RSSI calibration models
-
-\* Add Kalman filtering for tracking
-
-\* Integrate fingerprinting datasets
-
-\* Evaluate machine-learning localization models
-
-\* Add real-time dashboard visualization
-
-\* Add automated tests and evaluation datasets
-
-
-
-\## Academic Project
-
-
-
-\*\*Project:\*\* AI-Based Indoor Localization and Tracking for IoT Networks
-
-
-
-\*\*Author:\*\* Mostafa Elgazar
-
-
-
-\*\*Department:\*\* Electrical and Communication Engineering
-
-
-
-\*\*Institution:\*\* The British University in Egypt
-
-
-
-\*\*Project Type:\*\* Bachelor’s Graduation Project
-
-
-
-\## License
-
-
-
-This repository is provided for academic and educational purposes.
-
-
-
+**AI-Based Indoor Localization and Tracking for IoT Networks**  
+**Mostafa Elgazar** — Electrical and Communication Engineering  
+The British University in Egypt
